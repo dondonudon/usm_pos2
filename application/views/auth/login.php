@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>POS</title>
+        <title>POS | MONOKROM</title>
         <!-- Tell the browser to be responsive to screen width -->
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
         <!-- Bootstrap 3.3.7 -->
@@ -35,13 +35,13 @@
             <!-- /.login-logo -->
             <div class="login-box-body">
                 <?php
-                $status_login = $this->session->userdata('status_login');
-                if (empty($status_login)) {
-                    $message = "Silahkan login untuk masuk ke aplikasi";
-                } else {
-                    $message = $status_login;
-                }
-                ?>
+$status_login = $this->session->userdata('status_login');
+if (empty($status_login)) {
+    $message = "Silahkan login untuk masuk ke aplikasi";
+} else {
+    $message = $status_login;
+}
+?>
                 <p class="login-box-msg"><?php echo $message; ?></p>
 
                 <!--<form action="<?php echo base_url(); ?>/adminlte/index2.html" method="post">-->
