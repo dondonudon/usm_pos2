@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jun 30, 2020 at 05:54 AM
+-- Generation Time: Jul 01, 2020 at 02:23 PM
 -- Server version: 8.0.20-0ubuntu0.20.04.1
 -- PHP Version: 7.4.3
 
@@ -38,8 +38,8 @@ CREATE TABLE `counter` (
 --
 
 INSERT INTO `counter` (`id`, `counter`) VALUES
-('A', 5),
-('B', 0);
+('A', 6),
+('B', 5);
 
 -- --------------------------------------------------------
 
@@ -63,7 +63,10 @@ CREATE TABLE `log` (
 
 INSERT INTO `log` (`id_log`, `ket`, `kode_m_kasir`, `id_barang`, `qty`, `tipe`, `datetime`) VALUES
 (10, '2A2020060005', NULL, 6, 10, 'A', '2020-06-27 16:15:20'),
-(9, '2A2020060005', NULL, 3, 10, 'A', '2020-06-27 16:15:20');
+(9, '2A2020060005', NULL, 3, 10, 'A', '2020-06-27 16:15:20'),
+(17, '8B2020070005', NULL, 3, 3, 'B', '2020-07-01 09:59:20'),
+(16, '8B2020070005', NULL, 4, 5, 'A', '2020-07-01 09:59:20'),
+(18, '8B2020070005', NULL, 4, 5, 'B', '2020-07-01 09:59:20');
 
 -- --------------------------------------------------------
 
@@ -78,7 +81,7 @@ CREATE TABLE `mst_barang` (
   `ukuran` varchar(10) NOT NULL,
   `stok` int DEFAULT '0',
   `use_stok` int NOT NULL DEFAULT '0',
-  `harga` int DEFAULT NULL,
+  `harga` int DEFAULT '0',
   `use_pricelist` int NOT NULL DEFAULT '0',
   `datetime` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -88,9 +91,9 @@ CREATE TABLE `mst_barang` (
 --
 
 INSERT INTO `mst_barang` (`id`, `id_kategori`, `barang`, `ukuran`, `stok`, `use_stok`, `harga`, `use_pricelist`, `datetime`) VALUES
-(3, 1, 'a', 'a4', 10, 1, NULL, 1, '2020-06-24 03:56:34'),
+(3, 1, 'a', 'a4', 7, 1, 0, 1, '2020-06-24 03:56:34'),
 (4, 1, 'b', 'a4', 0, 0, 1000, 0, '2020-06-24 04:03:02'),
-(5, 1, 'c', 'a4', 0, 0, NULL, 1, '2020-06-24 04:03:23'),
+(5, 1, 'c', 'a4', 0, 0, 0, 1, '2020-06-24 04:03:23'),
 (6, 1, 'd', 'a4', 10, 1, 1000, 0, '2020-06-24 04:04:44');
 
 -- --------------------------------------------------------
@@ -227,8 +230,8 @@ CREATE TABLE `range_pricelist` (
 
 INSERT INTO `range_pricelist` (`id`, `nama`, `keterangan`, `qty_a`, `qty_b`, `datetime`) VALUES
 (1, '1-10', '1-10', 1, 10, '2020-06-24 04:31:51'),
-(2, '2-20', '2-20', 2, 20, '2020-06-24 04:32:43'),
-(3, '3-999999999', '3-999999999', 3, 999999999, '2020-06-24 04:32:59');
+(2, '2-20', '2-20', 11, 20, '2020-07-01 08:17:08'),
+(3, '3-999999999', '3-999999999', 21, 999999999, '2020-07-01 08:17:12');
 
 -- --------------------------------------------------------
 
@@ -302,8 +305,8 @@ INSERT INTO `tbl_menu` (`id_menu`, `title`, `url`, `icon`, `is_main_menu`, `urut
 (13, 'Barang Masuk', 'po', 'fa fa-shopping-basket', 12, 1, 'y'),
 (14, 'Penjualan', 'trans', 'fa fa-shopping-cart', 12, 2, 'y'),
 (15, 'Laporan', '#', 'fa fa-file-o', 0, 3, 'y'),
-(16, 'Barang Masuk', '#', 'fa fa-shopping-basket', 15, 1, 'y'),
-(17, 'Penjualan', '#', 'fa fa-shopping-cart', 15, 2, 'y'),
+(16, 'Barang Masuk', 'laporan_masuk', 'fa fa-shopping-basket', 15, 1, 'y'),
+(17, 'Penjualan', 'laporan_keluar', 'fa fa-shopping-cart', 15, 2, 'y'),
 (19, 'Master', '#', 'fa fa-database', 0, 1, 'y'),
 (20, 'Master Kategori', 'mst_kategori', 'fa fa-bars', 19, 1, 'y'),
 (21, 'Pricelist', 'pricelist', 'fa fa-money', 19, 5, 'y'),
@@ -398,7 +401,6 @@ CREATE TABLE `temp_po` (
 CREATE TABLE `temp_trans` (
   `id` int NOT NULL,
   `notrans` varchar(15) NOT NULL,
-  `id_customer` int NOT NULL,
   `id_barang` int NOT NULL,
   `qty` int NOT NULL,
   `harga` int NOT NULL,
@@ -415,11 +417,19 @@ CREATE TABLE `temp_trans` (
 CREATE TABLE `trans` (
   `id` int NOT NULL,
   `notrans` varchar(15) NOT NULL,
-  `jumlah` int NOT NULL,
+  `id_customer` int NOT NULL,
+  `jumlah` int DEFAULT NULL,
   `ket` varchar(50) NOT NULL,
   `id_user` int NOT NULL,
   `datetime` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `trans`
+--
+
+INSERT INTO `trans` (`id`, `notrans`, `id_customer`, `jumlah`, `ket`, `id_user`, `datetime`) VALUES
+(6, '8B2020070005', 1, NULL, 'asdas', 8, '2020-07-01 09:59:20');
 
 -- --------------------------------------------------------
 
@@ -430,13 +440,20 @@ CREATE TABLE `trans` (
 CREATE TABLE `trans_detail` (
   `id` int NOT NULL,
   `notrans` varchar(15) NOT NULL,
-  `id_customer` int NOT NULL,
   `id_barang` int NOT NULL,
   `qty` int NOT NULL,
   `harga` int NOT NULL,
   `jumlah` int NOT NULL,
   `datetime` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `trans_detail`
+--
+
+INSERT INTO `trans_detail` (`id`, `notrans`, `id_barang`, `qty`, `harga`, `jumlah`, `datetime`) VALUES
+(8, '8B2020070005', 3, 3, 3000, 9000, '2020-07-01 09:59:05'),
+(9, '8B2020070005', 4, 5, 1000, 5000, '2020-07-01 09:59:14');
 
 --
 -- Indexes for dumped tables
@@ -559,7 +576,7 @@ ALTER TABLE `trans_detail`
 -- AUTO_INCREMENT for table `log`
 --
 ALTER TABLE `log`
-  MODIFY `id_log` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_log` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `mst_barang`
@@ -637,25 +654,25 @@ ALTER TABLE `tbl_user_level`
 -- AUTO_INCREMENT for table `temp_po`
 --
 ALTER TABLE `temp_po`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `temp_trans`
 --
 ALTER TABLE `temp_trans`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `trans`
 --
 ALTER TABLE `trans`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `trans_detail`
 --
 ALTER TABLE `trans_detail`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
