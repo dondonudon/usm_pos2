@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jul 01, 2020 at 02:23 PM
+-- Generation Time: Jul 01, 2020 at 02:50 PM
 -- Server version: 8.0.20-0ubuntu0.20.04.1
 -- PHP Version: 7.4.3
 
@@ -263,15 +263,16 @@ INSERT INTO `tbl_hak_akses` (`id`, `id_user_level`, `id_menu`) VALUES
 (37, 2, 16),
 (38, 2, 17),
 (39, 3, 10),
-(40, 3, 12),
-(41, 3, 14),
 (42, 3, 15),
 (43, 3, 17),
 (44, 2, 8),
 (45, 2, 19),
 (46, 2, 20),
 (47, 2, 21),
-(48, 2, 22);
+(48, 2, 22),
+(51, 3, 12),
+(52, 3, 13),
+(53, 3, 14);
 
 -- --------------------------------------------------------
 
@@ -624,13 +625,13 @@ ALTER TABLE `range_pricelist`
 -- AUTO_INCREMENT for table `tbl_hak_akses`
 --
 ALTER TABLE `tbl_hak_akses`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
 --
 -- AUTO_INCREMENT for table `tbl_menu`
 --
 ALTER TABLE `tbl_menu`
-  MODIFY `id_menu` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id_menu` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `tbl_setting`
