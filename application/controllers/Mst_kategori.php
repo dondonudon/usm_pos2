@@ -1,77 +1,79 @@
 <?php
 
-if (!defined('BASEPATH'))
+if (!defined('BASEPATH')) {
     exit('No direct script access allowed');
+}
 
 class Mst_kategori extends CI_Controller
 {
-    function __construct()
+    public function __construct()
     {
         parent::__construct();
-        $this->session->set_flashdata('title', 'Master Kategori | MONOKROM');
+        $this->session->set_flashdata('title', 'Master Kategori | HELLO PRINT');
         is_login();
         $this->load->model('Mst_kategori_model');
-        $this->load->library('form_validation');        
-	$this->load->library('datatables');
+        $this->load->library('form_validation');
+        $this->load->library('datatables');
     }
 
     public function index()
     {
-        $this->template->load('template','mst_kategori/mst_kategori_list');
-    } 
-    
-    public function json() {
+        $this->template->load('template', 'mst_kategori/mst_kategori_list');
+    }
+
+    public function json()
+    {
         header('Content-Type: application/json');
         echo $this->Mst_kategori_model->json();
     }
 
-    public function read($id) 
+    public function read($id)
     {
         $row = $this->Mst_kategori_model->get_by_id($id);
         if ($row) {
             $data = array(
-		'datetime' => $row->datetime,
-		'id' => $row->id,
-		'kategori' => $row->kategori,
-	    );
-            $this->template->load('template','mst_kategori/mst_kategori_read', $data);
+                'datetime' => $row->datetime,
+                'id' => $row->id,
+                'kategori' => $row->kategori,
+            );
+            $this->template->load('template', 'mst_kategori/mst_kategori_read', $data);
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
             redirect(site_url('mst_kategori'));
         }
     }
 
-    public function create() 
+    public function create()
     {
         $data = array(
             'button' => 'Create',
             'action' => site_url('mst_kategori/create_action'),
-	    'datetime' => set_value('datetime'),
-	    'id' => set_value('id'),
-	    'kategori' => set_value('kategori'),
-	);
-        $this->template->load('template','mst_kategori/mst_kategori_form', $data);
+            'datetime' => set_value('datetime'),
+            'id' => set_value('id'),
+            'kategori' => set_value('kategori'),
+        );
+        $this->template->load('template', 'mst_kategori/mst_kategori_form', $data);
     }
-    
-    public function create_action() 
+
+    public function create_action()
     {
         $this->_rules();
 
-        if ($this->form_validation->run() == FALSE) {
+        if ($this->form_validation->run() == false) {
             $this->create();
         } else {
             $data = array(
-		'datetime' => date('Y-m-d H:i:s'),
-		'kategori' => $this->input->post('kategori',TRUE),
-	    );
+                'datetime' => date('Y-m-d H:i:s'),
+                'kategori' => $this->input->post('kategori', true),
+            );
 
             $this->Mst_kategori_model->insert($data);
             $this->session->set_flashdata('message', 'Create Record Success 2');
             redirect(site_url('mst_kategori'));
         }
     }
-    
-    public function update($id) 
+
+    public function update($id)
     {
         $row = $this->Mst_kategori_model->get_by_id($id);
 
@@ -79,36 +81,36 @@ class Mst_kategori extends CI_Controller
             $data = array(
                 'button' => 'Update',
                 'action' => site_url('mst_kategori/update_action'),
-		'datetime' => set_value('datetime', $row->datetime),
-		'id' => set_value('id', $row->id),
-		'kategori' => set_value('kategori', $row->kategori),
-	    );
-            $this->template->load('template','mst_kategori/mst_kategori_form', $data);
+                'datetime' => set_value('datetime', $row->datetime),
+                'id' => set_value('id', $row->id),
+                'kategori' => set_value('kategori', $row->kategori),
+            );
+            $this->template->load('template', 'mst_kategori/mst_kategori_form', $data);
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
             redirect(site_url('mst_kategori'));
         }
     }
-    
-    public function update_action() 
+
+    public function update_action()
     {
         $this->_rules();
 
-        if ($this->form_validation->run() == FALSE) {
-            $this->update($this->input->post('id', TRUE));
+        if ($this->form_validation->run() == false) {
+            $this->update($this->input->post('id', true));
         } else {
             $data = array(
-		'datetime' => $this->input->post('datetime',TRUE),
-		'kategori' => $this->input->post('kategori',TRUE),
-	    );
+                'datetime' => $this->input->post('datetime', true),
+                'kategori' => $this->input->post('kategori', true),
+            );
 
-            $this->Mst_kategori_model->update($this->input->post('id', TRUE), $data);
+            $this->Mst_kategori_model->update($this->input->post('id', true), $data);
             $this->session->set_flashdata('message', 'Update Record Success');
             redirect(site_url('mst_kategori'));
         }
     }
-    
-    public function delete($id) 
+
+    public function delete($id)
     {
         $row = $this->Mst_kategori_model->get_by_id($id);
 
@@ -122,13 +124,13 @@ class Mst_kategori extends CI_Controller
         }
     }
 
-    public function _rules() 
+    public function _rules()
     {
-	// $this->form_validation->set_rules('datetime', 'datetime', 'trim|required');
-	$this->form_validation->set_rules('kategori', 'kategori', 'trim|required');
+        // $this->form_validation->set_rules('datetime', 'datetime', 'trim|required');
+        $this->form_validation->set_rules('kategori', 'kategori', 'trim|required');
 
-	$this->form_validation->set_rules('id', 'id', 'trim');
-	$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
+        $this->form_validation->set_rules('id', 'id', 'trim');
+        $this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
     }
 
     public function excel()
@@ -153,18 +155,18 @@ class Mst_kategori extends CI_Controller
 
         $kolomhead = 0;
         xlsWriteLabel($tablehead, $kolomhead++, "No");
-	xlsWriteLabel($tablehead, $kolomhead++, "Datetime");
-	xlsWriteLabel($tablehead, $kolomhead++, "Kategori");
+        xlsWriteLabel($tablehead, $kolomhead++, "Datetime");
+        xlsWriteLabel($tablehead, $kolomhead++, "Kategori");
 
-	foreach ($this->Mst_kategori_model->get_all() as $data) {
+        foreach ($this->Mst_kategori_model->get_all() as $data) {
             $kolombody = 0;
 
             //ubah xlsWriteLabel menjadi xlsWriteNumber untuk kolom numeric
             xlsWriteNumber($tablebody, $kolombody++, $nourut);
-	    xlsWriteLabel($tablebody, $kolombody++, $data->datetime);
-	    xlsWriteLabel($tablebody, $kolombody++, $data->kategori);
+            xlsWriteLabel($tablebody, $kolombody++, $data->datetime);
+            xlsWriteLabel($tablebody, $kolombody++, $data->kategori);
 
-	    $tablebody++;
+            $tablebody++;
             $nourut++;
         }
 

@@ -13,7 +13,7 @@ class Trans extends CI_Controller
         $this->load->model('Trans_model');
         $this->load->model('Mst_barang_model');
         $this->load->library('form_validation');
-        $this->session->set_flashdata('title', 'Penjualan | MONOKROM');
+        $this->session->set_flashdata('title', 'Penjualan | HELLO PRINT');
         $this->load->library('datatables');
     }
 

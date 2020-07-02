@@ -27,7 +27,7 @@ $data = $this->db->query("SELECT
 </style>
 <link rel="stylesheet" href="<?php echo base_url() ?>assets/adminlte/bower_components/bootstrap/dist/css/bootstrap.min.css">
 <body class="body">
-<center><h2>MONOKROM</h2>
+<center><h2>HELLO PRINT</h2>
 </center>
 
       <table class='table table-bordered table-striped'>

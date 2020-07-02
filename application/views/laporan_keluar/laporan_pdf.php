@@ -32,7 +32,7 @@ if (empty($tanggal_a) || empty($tanggal_b)) {
 </style>
 <link rel="stylesheet" href="<?php echo base_url() ?>assets/adminlte/bower_components/bootstrap/dist/css/bootstrap.min.css">
 <body class="body">
-<center><h2>MONOKROM</h2>
+<center><h2>HELLO PRINT</h2>
 <h3>LAPORAN BARANG KELUAR</h3>
 </center>
 

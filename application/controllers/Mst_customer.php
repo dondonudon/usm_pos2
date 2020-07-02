@@ -1,83 +1,85 @@
 <?php
 
-if (!defined('BASEPATH'))
+if (!defined('BASEPATH')) {
     exit('No direct script access allowed');
+}
 
 class Mst_customer extends CI_Controller
 {
-    function __construct()
+    public function __construct()
     {
         parent::__construct();
-        $this->session->set_flashdata('title', 'Master Customer | MONOKROM');
+        $this->session->set_flashdata('title', 'Master Customer | HELLO PRINT');
         is_login();
         $this->load->model('Mst_customer_model');
-        $this->load->library('form_validation');        
-	$this->load->library('datatables');
+        $this->load->library('form_validation');
+        $this->load->library('datatables');
     }
 
     public function index()
     {
-        $this->template->load('template','mst_customer/mst_customer_list');
-    } 
-    
-    public function json() {
+        $this->template->load('template', 'mst_customer/mst_customer_list');
+    }
+
+    public function json()
+    {
         header('Content-Type: application/json');
         echo $this->Mst_customer_model->json();
     }
 
-    public function read($id) 
+    public function read($id)
     {
         $row = $this->Mst_customer_model->get_by_id($id);
         if ($row) {
             $data = array(
-		'alamat' => $row->alamat,
-		'datetime' => $row->datetime,
-		'id' => $row->id,
-		'nama' => $row->nama,
-		'telp' => $row->telp,
-	    );
-            $this->template->load('template','mst_customer/mst_customer_read', $data);
+                'alamat' => $row->alamat,
+                'datetime' => $row->datetime,
+                'id' => $row->id,
+                'nama' => $row->nama,
+                'telp' => $row->telp,
+            );
+            $this->template->load('template', 'mst_customer/mst_customer_read', $data);
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
             redirect(site_url('mst_customer'));
         }
     }
 
-    public function create() 
+    public function create()
     {
         $data = array(
             'button' => 'Create',
             'action' => site_url('mst_customer/create_action'),
-	    'alamat' => set_value('alamat'),
-	    'datetime' => set_value('datetime'),
-	    'id' => set_value('id'),
-	    'nama' => set_value('nama'),
-	    'telp' => set_value('telp'),
-	);
-        $this->template->load('template','mst_customer/mst_customer_form', $data);
+            'alamat' => set_value('alamat'),
+            'datetime' => set_value('datetime'),
+            'id' => set_value('id'),
+            'nama' => set_value('nama'),
+            'telp' => set_value('telp'),
+        );
+        $this->template->load('template', 'mst_customer/mst_customer_form', $data);
     }
-    
-    public function create_action() 
+
+    public function create_action()
     {
         $this->_rules();
 
-        if ($this->form_validation->run() == FALSE) {
+        if ($this->form_validation->run() == false) {
             $this->create();
         } else {
             $data = array(
-		'alamat' => $this->input->post('alamat',TRUE),
-		'datetime' => date('Y-m-d H:i:s'),
-		'nama' => $this->input->post('nama',TRUE),
-		'telp' => $this->input->post('telp',TRUE),
-	    );
+                'alamat' => $this->input->post('alamat', true),
+                'datetime' => date('Y-m-d H:i:s'),
+                'nama' => $this->input->post('nama', true),
+                'telp' => $this->input->post('telp', true),
+            );
 
             $this->Mst_customer_model->insert($data);
             $this->session->set_flashdata('message', 'Create Record Success 2');
             redirect(site_url('mst_customer'));
         }
     }
-    
-    public function update($id) 
+
+    public function update($id)
     {
         $row = $this->Mst_customer_model->get_by_id($id);
 
@@ -85,40 +87,40 @@ class Mst_customer extends CI_Controller
             $data = array(
                 'button' => 'Update',
                 'action' => site_url('mst_customer/update_action'),
-		'alamat' => set_value('alamat', $row->alamat),
-		'datetime' => set_value('datetime', $row->datetime),
-		'id' => set_value('id', $row->id),
-		'nama' => set_value('nama', $row->nama),
-		'telp' => set_value('telp', $row->telp),
-	    );
-            $this->template->load('template','mst_customer/mst_customer_form', $data);
+                'alamat' => set_value('alamat', $row->alamat),
+                'datetime' => set_value('datetime', $row->datetime),
+                'id' => set_value('id', $row->id),
+                'nama' => set_value('nama', $row->nama),
+                'telp' => set_value('telp', $row->telp),
+            );
+            $this->template->load('template', 'mst_customer/mst_customer_form', $data);
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
             redirect(site_url('mst_customer'));
         }
     }
-    
-    public function update_action() 
+
+    public function update_action()
     {
         $this->_rules();
 
-        if ($this->form_validation->run() == FALSE) {
-            $this->update($this->input->post('id', TRUE));
+        if ($this->form_validation->run() == false) {
+            $this->update($this->input->post('id', true));
         } else {
             $data = array(
-		'alamat' => $this->input->post('alamat',TRUE),
-		'datetime' => $this->input->post('datetime',TRUE),
-		'nama' => $this->input->post('nama',TRUE),
-		'telp' => $this->input->post('telp',TRUE),
-	    );
+                'alamat' => $this->input->post('alamat', true),
+                'datetime' => $this->input->post('datetime', true),
+                'nama' => $this->input->post('nama', true),
+                'telp' => $this->input->post('telp', true),
+            );
 
-            $this->Mst_customer_model->update($this->input->post('id', TRUE), $data);
+            $this->Mst_customer_model->update($this->input->post('id', true), $data);
             $this->session->set_flashdata('message', 'Update Record Success');
             redirect(site_url('mst_customer'));
         }
     }
-    
-    public function delete($id) 
+
+    public function delete($id)
     {
         $row = $this->Mst_customer_model->get_by_id($id);
 
@@ -132,15 +134,15 @@ class Mst_customer extends CI_Controller
         }
     }
 
-    public function _rules() 
+    public function _rules()
     {
-	$this->form_validation->set_rules('alamat', 'alamat', 'trim|required');
-	// $this->form_validation->set_rules('datetime', 'datetime', 'trim|required');
-	$this->form_validation->set_rules('nama', 'nama', 'trim|required');
-	$this->form_validation->set_rules('telp', 'telp', 'trim|required');
+        $this->form_validation->set_rules('alamat', 'alamat', 'trim|required');
+        // $this->form_validation->set_rules('datetime', 'datetime', 'trim|required');
+        $this->form_validation->set_rules('nama', 'nama', 'trim|required');
+        $this->form_validation->set_rules('telp', 'telp', 'trim|required');
 
-	$this->form_validation->set_rules('id', 'id', 'trim');
-	$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
+        $this->form_validation->set_rules('id', 'id', 'trim');
+        $this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
     }
 
     public function excel()
@@ -165,22 +167,22 @@ class Mst_customer extends CI_Controller
 
         $kolomhead = 0;
         xlsWriteLabel($tablehead, $kolomhead++, "No");
-	xlsWriteLabel($tablehead, $kolomhead++, "Alamat");
-	xlsWriteLabel($tablehead, $kolomhead++, "Datetime");
-	xlsWriteLabel($tablehead, $kolomhead++, "Nama");
-	xlsWriteLabel($tablehead, $kolomhead++, "Telp");
+        xlsWriteLabel($tablehead, $kolomhead++, "Alamat");
+        xlsWriteLabel($tablehead, $kolomhead++, "Datetime");
+        xlsWriteLabel($tablehead, $kolomhead++, "Nama");
+        xlsWriteLabel($tablehead, $kolomhead++, "Telp");
 
-	foreach ($this->Mst_customer_model->get_all() as $data) {
+        foreach ($this->Mst_customer_model->get_all() as $data) {
             $kolombody = 0;
 
             //ubah xlsWriteLabel menjadi xlsWriteNumber untuk kolom numeric
             xlsWriteNumber($tablebody, $kolombody++, $nourut);
-	    xlsWriteLabel($tablebody, $kolombody++, $data->alamat);
-	    xlsWriteLabel($tablebody, $kolombody++, $data->datetime);
-	    xlsWriteLabel($tablebody, $kolombody++, $data->nama);
-	    xlsWriteLabel($tablebody, $kolombody++, $data->telp);
+            xlsWriteLabel($tablebody, $kolombody++, $data->alamat);
+            xlsWriteLabel($tablebody, $kolombody++, $data->datetime);
+            xlsWriteLabel($tablebody, $kolombody++, $data->nama);
+            xlsWriteLabel($tablebody, $kolombody++, $data->telp);
 
-	    $tablebody++;
+            $tablebody++;
             $nourut++;
         }
 

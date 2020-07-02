@@ -12,7 +12,7 @@ class Laporan_keluar extends CI_Controller
         parent::__construct();
         $this->load->model('Laporan_keluar_model');
         $this->load->library('form_validation');
-        $this->session->set_flashdata('title', 'Laporan Barang Keluar | MONOKROM');
+        $this->session->set_flashdata('title', 'Laporan Barang Keluar | HELLO PRINT');
         $this->load->library('datatables');
         $this->load->library('pdf');
         $this->load->library('pdfgenerator');

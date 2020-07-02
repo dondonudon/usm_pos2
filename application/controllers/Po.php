@@ -13,7 +13,7 @@ class Po extends CI_Controller
         $this->load->model('Po_model');
         $this->load->model('Mst_barang_model');
         $this->load->library('form_validation');
-        $this->session->set_flashdata('title', 'Barang Masuk | MONOKROM');
+        $this->session->set_flashdata('title', 'Barang Masuk | HELLO PRINT');
         $this->load->library('datatables');
     }
 
