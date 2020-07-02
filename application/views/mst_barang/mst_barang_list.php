@@ -3,11 +3,11 @@
         <div class="row">
             <div class="col-xs-12">
                 <div class="box box-warning box-solid">
-    
+
                     <div class="box-header">
                         <h3 class="box-title">KELOLA DATA MST_BARANG</h3>
                     </div>
-        
+
         <div class="box-body">
         <div style="padding-bottom: 10px;"'>
         <?php echo anchor(site_url('mst_barang/create'), '<i class="fa fa-wpforms" aria-hidden="true"></i> Tambah Data', 'class="btn btn-danger btn-sm"'); ?>
@@ -27,7 +27,7 @@
 		    <th width="200px">Action</th>
                 </tr>
             </thead>
-	    
+
         </table>
         </div>
                     </div>
@@ -75,7 +75,7 @@
                         {
                             "data": "id",
                             "orderable": false
-                        },{"data": "barang"},{"data": "harga"},{"data": "id_kategori"},{"data": "stok"},{"data": "ukuran"},
+                        },{"data": "barang"},{"data": "harga"},{"data": "kategori"},{"data": "stok"},{"data": "ukuran"},
                         {
                             "data" : "action",
                             "orderable": false,
