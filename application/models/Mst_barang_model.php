@@ -39,8 +39,13 @@ class Mst_barang_model extends CI_Model
     // get data by id
     public function get_by_id($id)
     {
-        $this->db->where($this->id, $id);
-        return $this->db->get($this->table)->row();
+        $query = $this->db->select('*')
+            ->from('mst_barang')
+            ->join('mst_kategori', 'mst_barang.id_kategori = mst_kategori.id')
+            ->where('mst_barang.id', $id)
+            ->get()->row();
+        return $query;
+
     }
 
     // get total rows

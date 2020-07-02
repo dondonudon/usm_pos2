@@ -36,7 +36,7 @@ class Mst_barang extends CI_Controller
                 'datetime' => $row->datetime,
                 'harga' => $row->harga,
                 'id' => $row->id,
-                'id_kategori' => $row->id_kategori,
+                'id_kategori' => $row->kategori,
                 'stok' => $row->stok,
                 'ukuran' => $row->ukuran,
                 'use_pricelist' => $row->use_pricelist,
