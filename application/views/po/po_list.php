@@ -12,7 +12,7 @@
         <div style="padding-bottom: 10px;"'>
         <?php echo anchor(site_url('po/create'), '<i class="fa fa-wpforms" aria-hidden="true"></i> Tambah Data', 'class="btn btn-danger btn-sm"'); ?>
 		</div>
-        <table class="table table-bordered table-striped" id="mytable">
+        <table class="table table-striped table-bordered dt-responsive nowrap" style="width:100%" id="mytable">
             <thead>
                 <tr>
                     <th width="30px">No</th>

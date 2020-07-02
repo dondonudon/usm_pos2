@@ -43,7 +43,7 @@
                             <input type="hidden" name="tanggal_b" id="tanggal_b">
                             <button type="submit" class="btn btn-success">Print</button>
                         </form><br>
-                        <table id="table" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                        <table id="table" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%" width="100%">
                             <thead>
                                 <tr>
                                     <th>No</th>

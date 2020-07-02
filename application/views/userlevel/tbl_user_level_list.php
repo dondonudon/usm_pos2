@@ -3,17 +3,17 @@
         <div class="row">
             <div class="col-xs-12">
                 <div class="box box-warning box-solid">
-    
+
                     <div class="box-header">
                         <h3 class="box-title">KELOLA DATA LEVEL USER</h3>
                     </div>
-        
+
         <div class="box-body">
         <div style="padding-bottom: 10px;"'>
         <?php echo anchor(site_url('userlevel/create'), '<i class="fa fa-wpforms" aria-hidden="true"></i> Tambah Data', 'class="btn btn-danger btn-sm"'); ?>
 		<?php echo anchor(site_url('userlevel/excel'), '<i class="fa fa-file-excel-o" aria-hidden="true"></i> Export Ms Excel', 'class="btn btn-success btn-sm"'); ?>
 		<?php echo anchor(site_url('userlevel/word'), '<i class="fa fa-file-word-o" aria-hidden="true"></i> Export Ms Word', 'class="btn btn-primary btn-sm"'); ?></div>
-        <table class="table table-bordered table-striped" id="mytable">
+        <table class="table table-striped table-bordered dt-responsive nowrap" style="width:100%" id="mytable">
             <thead>
                 <tr>
                     <th width="30px">No</th>
@@ -21,7 +21,7 @@
 		    <th width="200px">Action</th>
                 </tr>
             </thead>
-	    
+
         </table>
         </div>
                     </div>

@@ -11,13 +11,13 @@
                     </div>
 
                     <div class="box-body">
-                        <?php echo form_open('kelolamenu/simpan_setting')?>
+                        <?php echo form_open('kelolamenu/simpan_setting') ?>
                         <table class="table table-bordered">
                             <tr><td width="250">Tampilkan Menu Berdasarkan Level</td><td>
-                                    
+
                                     <?php
-                                    echo form_dropdown('tampil_menu',array('ya'=>'YA','tidak'=>'TIDAK'),$setting['value'],array('class'=>'form-control'));
-                                    ?>
+echo form_dropdown('tampil_menu', array('ya' => 'YA', 'tidak' => 'TIDAK'), $setting['value'], array('class' => 'form-control'));
+?>
                                 </td></tr>
                             <tr><td></td><td><button type="submit" class="btn btn-danger btn-sm">Simpan Perubahan</button></td></tr>
                         </table>
@@ -40,7 +40,7 @@
                             <?php echo anchor(site_url('kelolamenu/create'), '<i class="fa fa-wpforms" aria-hidden="true"></i> Tambah Data', 'class="btn btn-danger btn-sm"'); ?>
                             <?php //echo anchor(site_url('kelolamenu/excel'), '<i class="fa fa-file-excel-o" aria-hidden="true"></i> Export Ms Excel', 'class="btn btn-success btn-sm"'); ?>
                             <?php //echo anchor(site_url('kelolamenu/word'), '<i class="fa fa-file-word-o" aria-hidden="true"></i> Export Ms Word', 'class="btn btn-primary btn-sm"'); ?></div>
-                        <table class="table table-bordered table-striped" id="mytable">
+                            <table class="table table-striped table-bordered dt-responsive nowrap" style="width:100%" id="mytable">
                             <thead>
                                 <tr>
                                     <th width="30px">No</th>
