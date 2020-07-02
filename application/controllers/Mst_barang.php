@@ -76,16 +76,18 @@ class Mst_barang extends CI_Controller
         } else {
             $use_pricelist = $this->input->post('use_pricelist', true);
             $use_stok = $this->input->post('use_stok', true);
+            $harga = $this->input->post('harga', true);
 
             $check_pricelist = (isset($use_pricelist)) ? 1 : 0;
             $check_stok = (isset($use_stok)) ? 1 : 0;
+            $check_harga = (isset($harga)) ? $harga : 0;
 
             $data = array(
                 'barang' => $this->input->post('barang', true),
                 'datetime' => date('Y-m-d H:i:s'),
-                'harga' => $this->input->post('harga', true),
+                'harga' => $check_harga,
                 'id_kategori' => $this->input->post('id_kategori', true),
-                'stok' => $this->input->post('stok', true),
+                // 'stok' => $this->input->post('stok', true),
                 'ukuran' => $this->input->post('ukuran', true),
                 'use_pricelist' => $check_pricelist,
                 'use_stok' => $check_stok,
@@ -131,16 +133,18 @@ class Mst_barang extends CI_Controller
         } else {
             $use_pricelist = $this->input->post('use_pricelist', true);
             $use_stok = $this->input->post('use_stok', true);
+            $harga = $this->input->post('harga', true);
 
             $check_pricelist = (isset($use_pricelist)) ? 1 : 0;
             $check_stok = (isset($use_stok)) ? 1 : 0;
+            $check_harga = (isset($harga)) ? $harga : 0;
 
             $data = array(
                 'barang' => $this->input->post('barang', true),
                 'datetime' => date('Y-m-d H:i:s'),
-                'harga' => $this->input->post('harga', true),
+                'harga' => $check_harga,
                 'id_kategori' => $this->input->post('id_kategori', true),
-                'stok' => $this->input->post('stok', true),
+                // 'stok' => $this->input->post('stok', true),
                 'ukuran' => $this->input->post('ukuran', true),
                 'use_pricelist' => $check_pricelist,
                 'use_stok' => $check_stok,
