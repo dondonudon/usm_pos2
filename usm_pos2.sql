@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jul 03, 2020 at 02:44 AM
+-- Generation Time: Jul 03, 2020 at 03:52 AM
 -- Server version: 8.0.20-0ubuntu0.20.04.1
 -- PHP Version: 7.4.3
 
@@ -317,7 +317,7 @@ INSERT INTO `tbl_hak_akses` (`id`, `id_user_level`, `id_menu`) VALUES
 (51, 3, 12),
 (52, 3, 13),
 (53, 3, 14),
-(54, 3, 7);
+(54, 3, 77);
 
 -- --------------------------------------------------------
 
@@ -343,7 +343,6 @@ INSERT INTO `tbl_menu` (`id_menu`, `title`, `url`, `icon`, `is_main_menu`, `urut
 (1, 'KELOLA MENU', 'kelolamenu', 'fa fa-server', 0, 0, 'y'),
 (2, 'KELOLA PENGGUNA', 'user', 'fa fa-user-o', 0, 0, 'y'),
 (3, 'level PENGGUNA', 'userlevel', 'fa fa-users', 0, 0, 'y'),
-(7, 'Customer', 'mst_customer', 'fa fa-users', 0, 1, 'y'),
 (8, '', 'welcome', '', 0, 0, 'y'),
 (9, 'Contoh Form', 'welcome/form', 'fa fa-id-card', 0, 0, 'y'),
 (10, 'Customer', 'mst_customer', 'fa fa-users', 19, 3, 'y'),
@@ -357,7 +356,8 @@ INSERT INTO `tbl_menu` (`id_menu`, `title`, `url`, `icon`, `is_main_menu`, `urut
 (19, 'Master', '#', 'fa fa-database', 0, 1, 'y'),
 (20, 'Master Kategori', 'mst_kategori', 'fa fa-bars', 19, 1, 'y'),
 (21, 'Pricelist', 'pricelist', 'fa fa-money', 19, 5, 'y'),
-(22, 'Range Pricelist', 'range_pricelist', 'fa fa-money', 19, 4, 'y');
+(22, 'Range Pricelist', 'range_pricelist', 'fa fa-money', 19, 4, 'y'),
+(77, 'Customer', 'mst_customer', 'fa fa-users', 0, 1, 'y');
 
 -- --------------------------------------------------------
 
@@ -669,7 +669,7 @@ ALTER TABLE `tbl_hak_akses`
 -- AUTO_INCREMENT for table `tbl_menu`
 --
 ALTER TABLE `tbl_menu`
-  MODIFY `id_menu` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id_menu` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
 
 --
 -- AUTO_INCREMENT for table `tbl_setting`
