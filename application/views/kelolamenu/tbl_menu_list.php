@@ -94,6 +94,7 @@ echo form_dropdown('tampil_menu', array('ya' => 'YA', 'tidak' => 'TIDAK'), $sett
             },
             processing: true,
             serverSide: true,
+            scrollX: true,
             ajax: {"url": "kelolamenu/json", "type": "POST"},
             columns: [
                 {

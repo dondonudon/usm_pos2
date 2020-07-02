@@ -64,6 +64,7 @@
                     },
                     processing: true,
                     serverSide: true,
+                    scrollX: true,
                     ajax: {"url": "mst_kategori/json", "type": "POST"},
                     columns: [
                         {

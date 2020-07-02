@@ -70,6 +70,7 @@
                     },
                     processing: true,
                     serverSide: true,
+                    scrollX: true,
                     ajax: {"url": "mst_barang/json", "type": "POST"},
                     columns: [
                         {

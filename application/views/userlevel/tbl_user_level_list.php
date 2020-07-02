@@ -63,6 +63,7 @@
                     },
                     processing: true,
                     serverSide: true,
+                    scrollX: true,
                     ajax: {"url": "userlevel/json", "type": "POST"},
                     columns: [
                         {

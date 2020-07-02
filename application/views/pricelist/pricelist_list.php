@@ -71,6 +71,7 @@
                     },
                     processing: true,
                     serverSide: true,
+                    scrollX: true,
                     ajax: {"url": "pricelist/json", "type": "POST"},
                     columns: [
                         {

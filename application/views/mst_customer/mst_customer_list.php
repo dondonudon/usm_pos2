@@ -66,6 +66,7 @@
                     },
                     processing: true,
                     serverSide: true,
+                    scrollX: true,
                     ajax: {"url": "mst_customer/json", "type": "POST"},
                     columns: [
                         {

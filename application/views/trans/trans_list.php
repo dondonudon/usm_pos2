@@ -65,6 +65,7 @@
                     },
                     processing: true,
                     serverSide: true,
+                    scrollX: true,
                     ajax: {"url": "trans/json", "type": "POST"},
                     columns: [
                         {
