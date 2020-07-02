@@ -89,7 +89,7 @@
                     <div class="form-group">
                         <label class="control-label col-xs-3" >Harga</label>
                         <div class="col-xs-9">
-							<input type="text" class="form-control" name="harga" id="harga" placeholder="Harga" readonly />
+							<input type="text" class="readonly" name="harga" id="harga" placeholder="Harga" required />
                         </div>
                     </div>
                     <input type="hidden" class="form-control" name="jumlah_harga" id="jumlah_harga" placeholder="Harga" readonly />
@@ -105,6 +105,12 @@
             </div>
             </div>
         </div>
+        <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+        <script>
+            $(".readonly").on('keydown paste', function(e){
+                e.preventDefault();
+            });
+        </script>
         <!--END MODAL ADD-->
 
         <!-- MODAL EDIT -->
@@ -255,7 +261,12 @@
             if (stok_gudang<qty && use_stok==1) {
                 alert("STOK KURANG");
                 return false;
-            }else{
+            }
+            else if (harga == ''){
+                alert("SILAHKAN ISI PRICELIST");
+                return false;
+            }
+            else{
             $.ajax({
                 type : "POST",
                 url  : "<?php echo base_url('trans/simpan_barang') ?>",
