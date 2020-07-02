@@ -75,7 +75,9 @@
                         {
                             "data": "id",
                             "orderable": false
-                        },{"data": "barang"},{"data": "harga"},{"data": "kategori"},{"data": "stok"},{"data": "ukuran"},
+                        },{"data": "barang"},
+                        {"data": "harga",render: $.fn.dataTable.render.number(',', '.', 0, '')},
+                        {"data": "kategori"},{"data": "stok"},{"data": "ukuran"},
                         {
                             "data" : "action",
                             "orderable": false,
