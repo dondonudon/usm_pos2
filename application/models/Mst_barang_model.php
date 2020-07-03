@@ -39,7 +39,9 @@ class Mst_barang_model extends CI_Model
     // get data by id
     public function get_by_id($id)
     {
-        $query = $this->db->select('*')
+        $query = $this->db->select('mst_barang.id, mst_barang.id_kategori, mst_barang.barang, mst_barang.ukuran, mst_barang.stok,
+        mst_barang.use_stok, mst_barang.harga, mst_barang.use_pricelist, mst_barang.datetime,
+        mst_kategori.kategori')
             ->from('mst_barang')
             ->join('mst_kategori', 'mst_barang.id_kategori = mst_kategori.id')
             ->where('mst_barang.id', $id)
