@@ -15,7 +15,7 @@
 	    <!-- <tr><td>Opsi3</td><td><?php echo $opsi3; ?></td></tr>
 	    <tr><td>Opsi4</td><td><?php echo $opsi4; ?></td></tr>
 	    <tr><td>Opsi5</td><td><?php echo $opsi5; ?></td></tr> -->
-	    <tr><td></td><td><a href="<?php echo site_url('tab_kasir') ?>" class="btn btn-default">Cancel</a></td></tr>
+	    <tr><td></td><td><a href="<?php echo site_url('range_pricelist') ?>" class="btn btn-default">Cancel</a></td></tr>
 	</table>
 
 </div>
