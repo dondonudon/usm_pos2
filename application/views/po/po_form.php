@@ -10,7 +10,7 @@
 			<form name="form" id="form" action ="<?php base_url('');?>insert_trans" method="post">
 			<tr>
 				<td width="100px">No Transaksi</td>
-					<?php $notrans = $_SESSION['id_users'] . "" . nopo();?>
+					<?php $notrans = nopo();?>
 				<td width="200px">
 					<?php echo $notrans; ?></td>
 				<td width="100px">Tanggal</td>
@@ -18,7 +18,7 @@
 					<?php echo date('Y-m-d'); ?></strong></td>
 
 			</tr>
-			<tr>            
+			<tr>
 				<td>Keterangan</td>
 				<td><textarea class="form-control" rows="2" name="ket" id="ket"></textarea></td>
 
@@ -61,7 +61,7 @@
                     <div class="form-group">
                         <label class="control-label col-xs-3" >Kode Barang</label>
                         <div class="col-xs-9">
-							<?php echo select2_dinamis_id('id_barang', 'mst_barang', 'barang', 'id', 'Nama Barang','use_stok','1') ?>
+							<?php echo select2_dinamis_id('id_barang', 'mst_barang', 'barang', 'id', 'Nama Barang', 'use_stok', '1') ?>
                         </div>
                     </div>
 

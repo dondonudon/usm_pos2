@@ -10,7 +10,7 @@
 			<form name="form" id="form" action ="<?php base_url('');?>insert_trans" method="post">
 			<tr>
 				<td width="100px">No Transaksi</td>
-					<?php $notrans = $_SESSION['id_users'] . "" . notrans();?>
+					<?php $notrans = notrans();?>
 				<td width="200px">
 					<?php echo $notrans; ?></td>
 				<td width="100px">Tanggal</td>
