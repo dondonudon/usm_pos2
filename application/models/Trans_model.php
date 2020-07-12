@@ -103,10 +103,17 @@ class Trans_model extends CI_Model
         return $hasil->result();
     }
 
-    public function simpan_barang($id_barang, $qty, $harga, $jumlah_harga, $notrans, $datetime)
+    public function simpan_barang($id_barang, $qty, $harga, $jumlah_harga, $notrans, $datetime, $double)
     {
         // $jumlah = $stok * $harga;
-        $hasil = $this->db->query("INSERT INTO temp_trans (notrans,id_barang,qty,harga,jumlah,datetime) VALUES('$notrans','$id_barang','$qty','$harga','$jumlah_harga','$datetime')");
+        if ($double == 1) {
+            $jumlah_harga2 = $jumlah_harga * 2;
+            $qty2 = $qty * 2;
+        } elseif ($double == 0) {
+            $jumlah_harga2 = $jumlah_harga * 1;
+            $qty2 = $qty * 1;
+        }
+        $hasil = $this->db->query("INSERT INTO temp_trans (notrans,id_barang,qty,harga,jumlah,double_side,datetime) VALUES('$notrans','$id_barang','$qty2','$harga','$jumlah_harga2','$double','$datetime')");
         return $hasil;
     }
 
@@ -129,7 +136,7 @@ class Trans_model extends CI_Model
     public function get_stok($id_barang)
     {
         $hsl = $this->db->query("SELECT
-                                    stok, use_stok
+                                    stok, use_stok, id_kategori
                                 FROM
                                     mst_barang
                                 WHERE
@@ -138,6 +145,7 @@ class Trans_model extends CI_Model
             $hasil = array(
                 'stok' => $data->stok,
                 'use_stok' => $data->use_stok,
+                'id_kategori' => $data->id_kategori,
             );
         }
         return $hasil;

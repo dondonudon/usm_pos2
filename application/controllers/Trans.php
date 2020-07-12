@@ -159,8 +159,9 @@ class Trans extends CI_Controller
         $harga = $this->input->post('harga');
         $jumlah_harga = $this->input->post('jumlah_harga');
         $notrans = $this->input->post('notrans');
+        $double = $this->input->post('double');
         $datetime = date('Y-m-d H:i:s');
-        $data = $this->Trans_model->simpan_barang($id_barang, $qty, $harga, $jumlah_harga, $notrans, $datetime);
+        $data = $this->Trans_model->simpan_barang($id_barang, $qty, $harga, $jumlah_harga, $notrans, $datetime, $double);
         echo json_encode($data);
     }
 

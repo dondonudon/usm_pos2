@@ -35,7 +35,7 @@
 				<tr>
 					<th>Kode</th>
 					<th>Nama Barang</th>
-                    <th>Stok</th>
+                    <th>QTY</th>
                     <th>Harga</th>
                     <th>Jumlah</th>
 					<th style="text-align: right;">Aksi</th>
@@ -77,6 +77,7 @@
                     </div>
 
                     <input type="hidden" class="form-control" name="use_stok" id="use_stok" placeholder="" readonly/>
+                    <input type="hidden" class="form-control" name="id_kategori" id="id_kategori" placeholder="" readonly/>
 
 
                     <div class="form-group">
@@ -92,12 +93,18 @@
 							<input type="text" class="readonly" name="harga" id="harga" placeholder="Harga" required />
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label class="control-label col-xs-3" >Double Side</label>
+                        <div class="col-xs-9">
+                            <input type="checkbox" name="double_side" id="double_side" disabled />
+                        </div>
+                    </div>
                     <input type="hidden" class="form-control" name="jumlah_harga" id="jumlah_harga" placeholder="Harga" readonly />
 
                 </div>
 
                 <div class="modal-footer">
-					<input type="hidden" name="notrans" id="notrans" value="<?php echo $notrans; ?></td>">
+					<input type="hidden" name="notrans" id="notrans" value="<?php echo $notrans; ?>">
                     <button class="btn" data-dismiss="modal" aria-hidden="true">Tutup</button>
                     <button class="btn btn-info" id="btn_simpan">Simpan</button>
                 </div>
@@ -105,7 +112,7 @@
             </div>
             </div>
         </div>
-        <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+        <script src="<?php echo base_url() . 'assets/js/jquery-1.11.0.min.js' ?>"></script>
         <script>
             $(".readonly").on('keydown paste', function(e){
                 e.preventDefault();
@@ -183,7 +190,7 @@
 <script type="text/javascript" src="<?php echo base_url() . 'assets/js/jquery.js' ?>"></script>
 <script type="text/javascript" src="<?php echo base_url() . 'assets/js/bootstrap.js' ?>"></script>
 <script type="text/javascript" src="<?php echo base_url() . 'assets/js/jquery.dataTables.js' ?>"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="<?php echo base_url() . 'assets/js/jquery.2.1.1.min.js' ?>"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
 		tampil_data_barang();	//pemanggilan fungsi tampil barang.
@@ -257,6 +264,13 @@
             var harga			= $('#harga').val();
             var jumlah_harga    = $('#jumlah_harga').val();
 			var notrans	        = $('#notrans').val();
+            var double_side     = document.getElementById("double_side");
+
+            if (double_side.checked == true){
+                var double = 1;
+            } else {
+                var double = 0;
+            }
 
             if (stok_gudang<qty && use_stok==1) {
                 alert("STOK KURANG");
@@ -271,7 +285,7 @@
                 type : "POST",
                 url  : "<?php echo base_url('trans/simpan_barang') ?>",
                 dataType : "JSON",
-                data : {notrans:notrans, id_barang:id_barang , qty:qty, harga:harga, jumlah_harga:jumlah_harga},
+                data : {notrans:notrans, id_barang:id_barang , qty:qty, harga:harga, jumlah_harga:jumlah_harga, double:double},
                 success: function(data){
                     $('[name="id_barang"]').val("");
                     $('[name="qty"]').val("");
@@ -322,7 +336,7 @@
 	});
 
 </script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="<?php echo base_url() . 'assets/js/jquery.2.1.1.min.js' ?>"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
 			 $('#id_barang').on('change',function(){
@@ -337,10 +351,18 @@
                         $.each(data,function(id_barang){
 							$('[name="stok_gudang"]').val(data.stok);
                             $('[name="use_stok"]').val(data.use_stok);
+                            $('[name="id_kategori"]').val(data.id_kategori);
+                            console.log(data.id_kategori);
+                            if (data.id_kategori=='1') {
+                                document.getElementById("double_side").disabled = false;
+                            }
                         });
                     }
                 });
+                // var id_kategori = $('#id_kategori').val();
+                // console.log(id_kategori,id_barang);
                 return false;
+
             });
             $('#qty').on('change',function(){
                 // var kode_m_kasir=$("#kode_m_kasir").val();
