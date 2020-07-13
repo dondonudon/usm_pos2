@@ -8,11 +8,11 @@ class Laporan_masuk_model extends CI_Model
 {
 
     public $table = 'po';
-    public $id = 'id_s_kasir';
+    public $id = 'id';
 
     //var $table = 'customers';
-    public $column_order = array('po.datetime'); //set column field database for datatable orderable
-    public $column_search = array('ket', 'tanggal'); //set column field database for datatable searchable
+    public $column_order = array('no_po','datetime','datetime'); //set column field database for datatable orderable
+    public $column_search = array('no_po','datetime'); //set column field database for datatable searchable
     //var $order = array('id' => 'asc'); // default order
     //public $order = 'DESC';
 
