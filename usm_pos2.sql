@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jul 13, 2020 at 05:13 AM
+-- Generation Time: Jul 14, 2020 at 04:51 PM
 -- Server version: 8.0.20-0ubuntu0.20.04.1
 -- PHP Version: 7.4.3
 
@@ -29,7 +29,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `counter` (
-  `id` varchar(2) NOT NULL COMMENT 'A=notrans, B=stock_opname, C=master_stok_kasir, D=retur_kasir',
+  `id` varchar(2) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT 'A=po, B=trans',
   `counter` int NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
@@ -38,8 +38,8 @@ CREATE TABLE `counter` (
 --
 
 INSERT INTO `counter` (`id`, `counter`) VALUES
-('A', 3),
-('B', 4);
+('A', 0),
+('B', 1);
 
 -- --------------------------------------------------------
 
@@ -56,19 +56,6 @@ CREATE TABLE `log` (
   `tipe` varchar(1) NOT NULL COMMENT 'A=po, B=penjualan',
   `datetime` datetime NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `log`
---
-
-INSERT INTO `log` (`id_log`, `ket`, `kode_m_kasir`, `id_barang`, `qty`, `tipe`, `datetime`) VALUES
-(19, '3B2020070002', NULL, 2, 20, 'A', '2020-07-07 21:24:12'),
-(20, '3B2020070002', NULL, 2, 20, 'B', '2020-07-07 21:24:12'),
-(21, '2A2020070002', NULL, 5, 100, 'A', '2020-07-09 21:28:36'),
-(22, '3B2020070003', NULL, 5, 10, 'B', '2020-07-09 21:34:40'),
-(23, '3B2020070003', NULL, 5, 5, 'B', '2020-07-09 21:34:40'),
-(24, '2A2020070003', NULL, 81, 100, 'A', '2020-07-09 21:45:08'),
-(25, '3B2020070004', NULL, 5, 11, 'B', '2020-07-09 21:49:25');
 
 -- --------------------------------------------------------
 
@@ -96,7 +83,7 @@ INSERT INTO `mst_barang` (`id`, `id_kategori`, `barang`, `ukuran`, `stok`, `use_
 (2, 1, 'HVS 100 gr', '100 gr', 0, 0, 0, 1, '2020-07-07 21:13:32'),
 (3, 1, 'MATTE PAPER', '-', 0, 0, 0, 1, '2020-07-02 23:47:30'),
 (4, 1, 'CTS 150 gr', '150 gr', 0, 0, 0, 1, '2020-07-02 23:48:18'),
-(5, 1, 'IVORY 230 gr', '230 gr', 79, 1, 0, 1, '2020-07-09 21:26:36'),
+(5, 1, 'IVORY 230 gr', '230 gr', 0, 1, 0, 1, '2020-07-09 21:26:36'),
 (6, 6, 'Photopaper A2 Warna', '-', 0, 1, 35000, 0, '2020-07-03 17:32:36'),
 (7, 1, 'BC 200 gr', '200 gr', 0, 0, 0, 1, '2020-07-02 23:52:32'),
 (8, 1, 'SPLENDORGEL', '-', 0, 0, 0, 1, '2020-07-02 23:52:49'),
@@ -172,7 +159,7 @@ INSERT INTO `mst_barang` (`id`, `id_kategori`, `barang`, `ukuran`, `stok`, `use_
 (78, 6, 'Photopaper A1 Warna', '-', 0, 0, 55000, 0, '2020-07-03 02:42:10'),
 (79, 6, 'Photopaper A2 Warna', '-', 0, 0, 35000, 0, '2020-07-03 17:48:00'),
 (80, 1, 'HVS 80 GR', 'A3+', 0, 0, 0, 1, '2020-07-07 21:21:03'),
-(81, 1, 'Moorim Canvas', 'A3+', 100, 1, 0, 1, '2020-07-09 21:42:13');
+(81, 1, 'Moorim Canvas', 'A3+', 0, 1, 0, 1, '2020-07-09 21:42:13');
 
 -- --------------------------------------------------------
 
@@ -236,14 +223,6 @@ CREATE TABLE `po` (
   `id_user` int NOT NULL,
   `datetime` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `po`
---
-
-INSERT INTO `po` (`id`, `no_po`, `jumlah`, `ket`, `id_user`, `datetime`) VALUES
-(10, '2A2020070002', 0, 'Mataram Indah Kertas', 2, '2020-07-09 21:28:34'),
-(11, '2A2020070003', 0, 'Mataram Indah Kertas', 2, '2020-07-09 21:45:08');
 
 -- --------------------------------------------------------
 
@@ -536,15 +515,6 @@ CREATE TABLE `trans` (
   `datetime` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Dumping data for table `trans`
---
-
-INSERT INTO `trans` (`id`, `notrans`, `id_customer`, `jumlah`, `ket`, `id_user`, `datetime`) VALUES
-(7, '3B2020070002', 2, NULL, 'Cetak', 3, '2020-07-07 21:24:12'),
-(8, '3B2020070003', 4, NULL, 'Cetak A3+', 3, '2020-07-09 21:34:40'),
-(9, '3B2020070004', 5, NULL, 'Polaroid', 3, '2020-07-09 21:49:25');
-
 -- --------------------------------------------------------
 
 --
@@ -561,16 +531,6 @@ CREATE TABLE `trans_detail` (
   `double_side` int DEFAULT NULL,
   `datetime` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `trans_detail`
---
-
-INSERT INTO `trans_detail` (`id`, `notrans`, `id_barang`, `qty`, `harga`, `jumlah`, `double_side`, `datetime`) VALUES
-(10, '3B2020070002', 2, 20, 5100, 102000, NULL, '2020-07-07 21:23:42'),
-(11, '3B2020070003', 5, 10, 5200, 52000, NULL, '2020-07-09 21:33:12'),
-(12, '3B2020070003', 5, 5, 6000, 30000, NULL, '2020-07-09 21:33:54'),
-(14, '3B2020070004', 5, 11, 5200, 57200, NULL, '2020-07-09 21:49:21');
 
 --
 -- Indexes for dumped tables
